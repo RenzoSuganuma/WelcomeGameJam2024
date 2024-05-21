@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 161534707778625907}
   - component: {fileID: 1191189922910949753}
   - component: {fileID: 8134296817469963662}
-  - component: {fileID: -2252546381484341162}
+  - component: {fileID: 1390872443923025165}
   m_Layer: 6
   m_Name: Thunder
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57038a7b9fdf14d4da17aa75e38dda4d, type: 3}
   m_Color: {r: 1, g: 0.80399513, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,8 +129,8 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
---- !u!58 &-2252546381484341162
-CircleCollider2D:
+--- !u!61 &1390872443923025165
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,6 +161,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.15615696, y: 0.22382486}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.84, y: 3.84}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.1124588, y: 1.8932436}
+  m_EdgeRadius: 0
