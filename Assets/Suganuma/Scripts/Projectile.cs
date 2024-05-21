@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] GameObject _hitEffect;
+
     /// <summary>
     /// –ÚŽw‚µ‚Ä‚¢‚é•ûŒü
     /// </summary>
