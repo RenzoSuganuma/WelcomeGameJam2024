@@ -13,4 +13,13 @@ public class Raindrop : MonoBehaviour
     {
         _objectPool.RemoveObject(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out IDamage target))
+        {
+            if (collision.gameObject.CompareTag("P1")) { target.ReceiveDamege(1); }
+            _objectPool.RemoveObject(gameObject);
+        }
+    }
 }
