@@ -9,7 +9,7 @@ public class ProjectileShooter : MonoBehaviour
 {
     [SerializeField, Header("発射元のオブジェクト")] private Transform _origin;
     [SerializeField, Header("動径の半径")] private float _radius;
-    [SerializeField, Header("入力キー")] private KeyCode _inputKey;
+    [SerializeField, Header("プロジェクタイル発射キー")] private KeyCode _fireKey;
     [SerializeField, Header("発射物")] private GameObject _projectile;
     [SerializeField, Header("攻撃タイプ")] private AttackType _attackType;
     [SerializeField, Header("通常発射物の速度")] private float _speedNormal;
@@ -37,11 +37,12 @@ public class ProjectileShooter : MonoBehaviour
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
-        if (Input.GetKeyDown(_inputKey))
+        _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
+
+        if (Input.GetKeyDown(_fireKey))
         {
             _isFired = true;
 
-            _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
             GameObject proj;
             Projectile projClass;
             proj = GameObject.Instantiate(_projectile);
