@@ -40,7 +40,6 @@ public class ProjectileShooter : MonoBehaviour
             case AttackType.Projectile:
                 {
                     _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
-                    Debug.Log($"{_direction.ToString()}");
                     // “ü—Í‚ª“ü‚Á‚½‚ç
                     if (Input.GetKeyDown(inputKey))
                     {
