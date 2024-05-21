@@ -11,6 +11,12 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private KeyCode inputKey;
     [SerializeField] private GameObject projectile;
+    [SerializeField] AttackType attackType;
+
+    public enum AttackType
+    {
+
+    }
 
     private float _elapsedTime = 0;
     private Vector3 _direction = Vector3.zero;
@@ -39,12 +45,12 @@ public class ProjectileShooter : MonoBehaviour
     // î≠éÀï˚å¸ÇåüçıÇ∑ÇÈ
     public Vector3 FindDirection(float theta)
     {
-        var h = Mathf.Sin(theta) * radius;
-        var w = Mathf.Cos(theta) * radius;
+        var h = Mathf.Sin(theta) * radius + origin.position.y;
+        var w = Mathf.Cos(theta) * radius + origin.position.x;
 
-        var direction = new Vector3(w, h, 0) - origin.position;
+        var direction = (new Vector3(w, h, 0) - origin.position).normalized;
 
-        Debug.DrawLine(Vector3.zero, new Vector3(w, h, 0));
+        Debug.DrawLine(origin.position, direction + origin.position);
 
         return direction;
     }

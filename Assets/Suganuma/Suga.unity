@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 1612061039}
   - component: {fileID: 1612061040}
   m_Layer: 0
-  m_Name: Shooter
+  m_Name: Shooter_P1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,6 +263,7 @@ MonoBehaviour:
   radius: 2
   inputKey: 32
   projectile: {fileID: 5165814252910396123, guid: 29564cfbbaea67a4fbc7ed5c5c1cfffd, type: 3}
+  attackType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
