@@ -69,25 +69,27 @@ public class WeatherController : MonoBehaviour
 
     //雷のMuzzleを増やす
 
-    private void Rainy()
+    private void Rainy() => SpawnRain();
+
+    private void HeavyRain()
+    {
+        _rainInterval = 0.05f;
+        SpawnRain();
+    }
+
+    private void SpawnRain()
     {
         //ダメージを与える雨粒の生成
         var damageRandomValue = _damageRainRandom.Next(0, 100);
-        var rain = 
+        var rain =
             damageRandomValue >= _damageRainProbability ?
             _normalRainPrefab : _damageRainPrefab;
-
         var spawnedRain = _objectPool.SpawnObject(rain);
         //生成位置の調整
         var spawnHol = _spawnRangeRandom.Next((int)_rainRange.MinWidth, (int)_rainRange.MaxWidth);
         spawnedRain.transform.position = new Vector2(spawnHol, transform.position.y);
 
         if (spawnedRain.TryGetComponent(out Raindrop raindrop)) { raindrop.Initialize(_objectPool); }
-    }
-
-    private void HeavyRain()
-    {
-
     }
 }
 
