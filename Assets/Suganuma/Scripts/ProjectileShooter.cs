@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class ProjectileShooter : MonoBehaviour
 {
-    [SerializeField, Header("発射元のオブジェクト")] private Transform _origin;
+    [SerializeField, Header("発射元のオブジェクト【腕】")] private Transform _origin;
     [SerializeField, Header("動径の半径")] private float _radius;
     [SerializeField, Header("プロジェクタイル発射キー")] private KeyCode _fireKey;
     [SerializeField, Header("発射物")] private GameObject _projectile;
@@ -15,8 +15,6 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField, Header("通常発射物の速度")] private float _speedNormal;
     [SerializeField, Header("即着発射物の速度")] private float _speedThunder;
     [SerializeField, Header("即着発射物の生成確率")] private float _probability;
-
-    bool _isFired = false;
 
     public enum AttackType
     {
@@ -38,11 +36,11 @@ public class ProjectileShooter : MonoBehaviour
     {
         _elapsedTime += Time.deltaTime;
         _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
+        if (gameObject.CompareTag("P1"))
+        { _origin.up = _direction; }
 
         if (Input.GetKeyDown(_fireKey))
         {
-            _isFired = true;
-
             GameObject proj;
             Projectile projClass;
             proj = GameObject.Instantiate(_projectile);
