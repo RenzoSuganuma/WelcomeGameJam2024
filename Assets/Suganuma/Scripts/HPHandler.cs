@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class HPHandler : MonoBehaviour
 {
-    [SerializeField] private float maxHealthPoint;
+    [SerializeField] private float _maxHealthPoint;
 
     public float CurrentHealth => _healthPoint;
 
@@ -15,7 +15,7 @@ public class HPHandler : MonoBehaviour
 
     private void Start()
     {
-        _healthPoint = maxHealthPoint;
+        _healthPoint = _maxHealthPoint;
     }
 
     private void Update()
