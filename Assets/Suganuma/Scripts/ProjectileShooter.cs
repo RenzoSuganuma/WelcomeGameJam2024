@@ -26,14 +26,13 @@ public class ProjectileShooter : MonoBehaviour
     {
         _elapsedTime += Time.deltaTime;
         _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
-
+        Debug.Log($"{_direction.ToString()}");
         // “ü—Í‚ª“ü‚Á‚½‚ç
         if (Input.GetKeyDown(inputKey))
         {
             var proj = GameObject.Instantiate(projectile);
             proj.transform.position = origin.position;
-
-
+            proj.GetComponent<Projectile>().Direction = _direction;
         }
     }
 
@@ -43,7 +42,7 @@ public class ProjectileShooter : MonoBehaviour
         var h = Mathf.Sin(theta) * radius;
         var w = Mathf.Cos(theta) * radius;
 
-        var direction = new Vector3(h, w, 0) - origin.position;
+        var direction = new Vector3(w, h, 0) - origin.position;
 
         Debug.DrawLine(Vector3.zero, new Vector3(w, h, 0));
 
