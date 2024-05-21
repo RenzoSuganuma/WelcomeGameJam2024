@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
             _rb2d.gravityScale = 0f;
         }
 
-        _speed= _speed < 1 ? 10f : _speed;
+        _speed = _speed < 1 ? 10f : _speed;
     }
 
     // Update is called once per frame
