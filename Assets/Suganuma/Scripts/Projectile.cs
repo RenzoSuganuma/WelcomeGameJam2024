@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class Projectile : MonoBehaviour
 {
+    [SerializeField, Header("”­Ë•¨ƒŒƒCƒ„[")] LayerMask layer;
+
     /// <summary>
     /// –Úw‚µ‚Ä‚¢‚é•ûŒü
     /// </summary>
@@ -37,12 +39,14 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
-        if (GetComponent<Rigidbody>() == null)
+        if (GetComponent<Rigidbody2D>() == null)
         {
             this.gameObject.AddComponent<Rigidbody2D>();
             _rb2d = GetComponent<Rigidbody2D>();
             _rb2d.gravityScale = 0f;
         }
+
+        _rb2d = GetComponent<Rigidbody2D>();
 
         _speed = _speed < 1 ? 10f : _speed;
     }
@@ -51,5 +55,13 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         _rb2d.velocity = _direction.normalized * _speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Projectile>() != null)
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 }
