@@ -5,11 +5,11 @@ using UnityEngine;
 /// </summary>
 public class HPHandler : MonoBehaviour, IDamage
 {
-    [SerializeField] private float _maxHealthPoint;
+    [SerializeField, Header("‘Ì—ÍÅ‘å’l")] private float _maxHealthPoint;
+    [SerializeField, Header("Œ»Ý‚Ì‘Ì—Í")] private float _healthPoint;
 
     public float CurrentHealth => _healthPoint;
 
-    private float _healthPoint;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class HPHandler : MonoBehaviour, IDamage
     {
         if (collision.gameObject.TryGetComponent(out Projectile projectile))
         {
-            if (projectile.GetSetInstantiator.ToString() != gameObject.tag) { ReceiveDamege(1); }
+            if (projectile.Maker.ToString() != gameObject.tag) { ReceiveDamege(1); }
         }
     }
 

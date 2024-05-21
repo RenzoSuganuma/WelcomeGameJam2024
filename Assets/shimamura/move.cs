@@ -10,6 +10,8 @@ public class move : MonoBehaviour
     [SerializeField] float Right = 5f;//‰E’[
     [SerializeField] float Left = -5f;//¶’[
     [SerializeField] PlayerType player = PlayerType.P1;
+    [SerializeField] Transform _rightBounds;
+    [SerializeField] Transform _leftBounds;
 
     float mov;
 
@@ -44,12 +46,12 @@ public class move : MonoBehaviour
         mov *= speed;
         //var mov = Input.GetAxis("Horizontal") * speed;
 
-        if (mov >= 0 && Pos.x <= Right)
+        if (mov >= 0 && Pos.x <= _rightBounds.position.x)
         {
             Pos.x += mov;
             this.transform.position = Pos;
         }
-        if (mov <= 0 && Pos.x >= Left)
+        if (mov <= 0 && Pos.x >= _leftBounds.position.x)
         {
             Pos.x += mov;
             this.transform.position = Pos;

@@ -50,8 +50,10 @@ public class ProjectileShooter : MonoBehaviour
             {
                 case AttackType.Projectile:
                     proj.transform.position = _origin.position;
-                    projClass.GetSetInstantiator = gameObject.tag == "P1" ? Projectile.Instantiator.P1 : Projectile.Instantiator.P2;
+
+                    projClass.Maker = gameObject.CompareTag(Projectile.Instantiator.P1.ToString()) ? Projectile.Instantiator.P1 : Projectile.Instantiator.P2;
                     projClass.Direction = _direction;
+
                     projClass.Speed = _speedNormal;
                     break;
                 case AttackType.Thunder:
@@ -59,13 +61,15 @@ public class ProjectileShooter : MonoBehaviour
                     Random.InitState((int)_elapsedTime);
                     var rand = Random.Range(1, 11);
                     proj.transform.position = _origin.position;
-                    projClass.GetSetInstantiator = gameObject.tag == "P1" ? Projectile.Instantiator.P1 : Projectile.Instantiator.P2;
+
+                    projClass.Maker = gameObject.CompareTag(Projectile.Instantiator.P1.ToString()) ? Projectile.Instantiator.P1 : Projectile.Instantiator.P2;
                     projClass.Direction = _direction;
+
                     if (rand < _probability)
                     {
-
                         projClass.Speed = _speedThunder;
-                        Random.InitState((int)_elapsedTime);
+                        proj.GetComponent<SpriteRenderer>().color = Color.red;
+                        Random.InitState(Random.seed);
                     }
                     else
                     {

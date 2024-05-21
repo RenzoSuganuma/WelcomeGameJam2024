@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] GameObject _hitEffect;
+    [SerializeField, Header("プロジェクタイルが何かに当たった時のエフェクト")] GameObject _hitEffect;
 
     /// <summary>
     /// 目指している方向
@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// P1またはP2が生成したかの情報
     /// </summary>
-    public Instantiator GetSetInstantiator
+    public Instantiator Maker
     {
         get { return _instantiator; }
         set { _instantiator = value; }
@@ -75,16 +75,18 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Projectile>() != null)
+        if (collision.TryGetComponent<Projectile>(out var projectile))
         {
-            if (collision.GetComponent<Projectile>().GetSetInstantiator != _instantiator)
+            if (projectile.Maker != _instantiator)
             { GameObject.Destroy(this.gameObject); }
         }
 
-        if (collision.GetComponent<HPHandler>() != null)
+        if (!collision.gameObject.CompareTag(_instantiator.ToString()) && collision.TryGetComponent<HPHandler>(out var component))
         {
-            if (collision.gameObject.tag != _instantiator.ToString())
-            { GameObject.Destroy(this.gameObject); }
+            var eff = GameObject.Instantiate(_hitEffect);
+            eff.transform.position = transform.position;
+            GameObject.Destroy(eff, 1);
+            GameObject.Destroy(this.gameObject);
         }
     }
 }
