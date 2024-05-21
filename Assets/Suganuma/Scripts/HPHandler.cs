@@ -13,15 +13,25 @@ public class HPHandler : MonoBehaviour
 
     private float _healthPoint;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        _healthPoint = maxHealthPoint;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(_healthPoint < 1)
+        {
+            Debug.Log(gameObject.name + "Is Death");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Projectile>() != null)
+        {
+            if (collision.GetComponent<Projectile>().GetSetInstantiator.ToString() != gameObject.tag)
+            { _healthPoint--; }
+        }
     }
 }
