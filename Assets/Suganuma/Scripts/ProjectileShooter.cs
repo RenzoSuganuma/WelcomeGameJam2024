@@ -12,23 +12,27 @@ public class ProjectileShooter : MonoBehaviour
 
     private void Start()
     {
-
+        // ‰½‚à‰Šú’l‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢‚É“Á’è‚Ì’l‚Å‰Šú‰»
+        if (origin == null) origin = transform;
+        radius = radius < 1 ? 2 : radius;
     }
 
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
-        FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad, out _direction);
+        _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
     }
 
     // ”­Ë•ûŒü‚ğŒŸõ‚·‚é
-    public void FindDirection(float theta, out Vector3 direction)
+    public Vector3 FindDirection(float theta)
     {
         var h = Mathf.Sin(theta) * radius;
         var w = Mathf.Cos(theta) * radius;
 
-        direction = new Vector3(h, w, 0) - origin.position;
+        var direction = new Vector3(h, w, 0) - origin.position;
 
         Debug.DrawLine(Vector3.zero, new Vector3(w, h, 0));
+
+        return direction;
     }
 }
