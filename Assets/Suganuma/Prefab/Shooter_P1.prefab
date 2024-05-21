@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _origin: {fileID: 656171484267963964}
   _radius: 2
-  _fireKey: 0
+  _fireKey: 304
   _projectile: {fileID: 5165814252910396123, guid: 29564cfbbaea67a4fbc7ed5c5c1cfffd, type: 3}
   _attackType: 0
   _speedNormal: 5
