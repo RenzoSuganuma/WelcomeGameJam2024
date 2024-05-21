@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ”­Ë•¨‚ğ”­Ë‚·‚é•ûŒü‚ğ’ñ‹Ÿ‚·‚éƒNƒ‰ƒX
+/// </summary>
 public class ProjectileShooter : MonoBehaviour
 {
     [SerializeField] private Transform origin;
     [SerializeField] private float radius;
+    [SerializeField] private KeyCode inputKey;
+    [SerializeField] private GameObject projectile;
 
     private float _elapsedTime = 0;
-    Vector3 _direction = Vector3.zero;
+    private Vector3 _direction = Vector3.zero;
 
     private void Start()
     {
@@ -21,6 +26,15 @@ public class ProjectileShooter : MonoBehaviour
     {
         _elapsedTime += Time.deltaTime;
         _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
+
+        // “ü—Í‚ª“ü‚Á‚½‚ç
+        if (Input.GetKeyDown(inputKey))
+        {
+            var proj = GameObject.Instantiate(projectile);
+            proj.transform.position = origin.position;
+
+
+        }
     }
 
     // ”­Ë•ûŒü‚ğŒŸõ‚·‚é
