@@ -42,9 +42,20 @@ public class AudioHolder : MonoBehaviour
 public enum BGMType
 {
     None,
+    Title,
+    InGame,
+    Result
 }
 
 public enum SEType
 {
     None,
+    P1Attack,
+    P2Attack,
+    P1Damaged,
+    P2Damaged,
+    UIClick,
+    Wind,
+    P1Damaged2,
+    UIClick2,
 }

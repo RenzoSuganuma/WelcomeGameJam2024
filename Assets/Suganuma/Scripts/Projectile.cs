@@ -31,18 +31,36 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// P1Ç‹ÇΩÇÕP2Ç™ê∂ê¨ÇµÇΩÇ©ÇÃèÓïÒ
+    /// </summary>
+    public Instantiator GetSetInstantiator
+    {
+        get { return _instantiator; }
+        set { _instantiator = value; }
+    }
+
     private float _speed;
     private Vector3 _direction = Vector3.up;
     private Rigidbody2D _rb2d;
+    private Instantiator _instantiator;
+
+    public enum Instantiator
+    {
+        P1,
+        P2
+    }
 
     private void Start()
     {
-        if (GetComponent<Rigidbody>() == null)
+        if (GetComponent<Rigidbody2D>() == null)
         {
             this.gameObject.AddComponent<Rigidbody2D>();
             _rb2d = GetComponent<Rigidbody2D>();
             _rb2d.gravityScale = 0f;
         }
+
+        _rb2d = GetComponent<Rigidbody2D>();
 
         _speed = _speed < 1 ? 10f : _speed;
     }
@@ -51,5 +69,20 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         _rb2d.velocity = _direction.normalized * _speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Projectile>() != null)
+        {
+            if (collision.GetComponent<Projectile>().GetSetInstantiator != _instantiator)
+            { GameObject.Destroy(this.gameObject); }
+        }
+
+        if (collision.GetComponent<HPHandler>() != null)
+        {
+            if (collision.gameObject.tag != _instantiator.ToString())
+            { GameObject.Destroy(this.gameObject); }
+        }
     }
 }

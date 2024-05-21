@@ -6,12 +6,12 @@ using Random = System.Random;
 public struct RainRange
 {
     [SerializeField]
-    private float _minWidth;
+    private Transform _minWidth;
     [SerializeField]
-    private float _maxWidth;
+    private Transform _maxWidth;
 
-    public readonly float MinWidth => _minWidth;
-    public readonly float MaxWidth => _maxWidth;
+    public readonly float MinWidth => _minWidth.position.x;
+    public readonly float MaxWidth => _maxWidth.position.x;
 }
 
 public class WeatherController : MonoBehaviour
@@ -29,12 +29,13 @@ public class WeatherController : MonoBehaviour
     [Header("雨が降る横幅")]
     [SerializeField]
     private RainRange _rainRange = new();
+    [SerializeField]
+    private float _rainInterval = 0.2f;
 
-    private readonly float _rainInterval = 0.2f;
     private float _rainTimer = 0f;
-
     private ObjectPool _objectPool = default;
-    private Random _random = default;
+    private Random _damageRainRandom = default;
+    private Random _spawnRangeRandom = default;
 
     public WeatherType WeatherType { get => _weatherType; set => _weatherType = value; }
 
@@ -42,7 +43,8 @@ public class WeatherController : MonoBehaviour
     {
         _rainTimer = 0f;
         _objectPool ??= new();
-        _random ??= new();
+        _damageRainRandom ??= new();
+        _spawnRangeRandom ??= new();
     }
 
     private void Update()
@@ -67,14 +69,27 @@ public class WeatherController : MonoBehaviour
 
     //雷のMuzzleを増やす
 
-    private void Rainy()
-    {
-
-    }
+    private void Rainy() => SpawnRain();
 
     private void HeavyRain()
     {
+        _rainInterval = 0.05f;
+        SpawnRain();
+    }
 
+    private void SpawnRain()
+    {
+        //ダメージを与える雨粒の生成
+        var damageRandomValue = _damageRainRandom.Next(0, 100);
+        var rain =
+            damageRandomValue >= _damageRainProbability ?
+            _normalRainPrefab : _damageRainPrefab;
+        var spawnedRain = _objectPool.SpawnObject(rain);
+        //生成位置の調整
+        var spawnHol = _spawnRangeRandom.Next((int)_rainRange.MinWidth, (int)_rainRange.MaxWidth);
+        spawnedRain.transform.position = new Vector2(spawnHol, transform.position.y);
+
+        if (spawnedRain.TryGetComponent(out Raindrop raindrop)) { raindrop.Initialize(_objectPool); }
     }
 }
 
