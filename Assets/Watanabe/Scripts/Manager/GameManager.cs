@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("GameFinish");
             _isGameFinish = true;
+            SceneLoader.FadeLoad(SceneName.Result);
         }
         else if (_timer <= _heavyRainPhaseTime && _weatherController.WeatherType == WeatherType.Rainy)
         {
