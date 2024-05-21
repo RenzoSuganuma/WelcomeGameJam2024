@@ -16,6 +16,8 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField, Header("ë¶íÖî≠éÀï®ÇÃë¨ìx")] private float speedThunder;
     [SerializeField, Header("ë¶íÖî≠éÀï®ÇÃê∂ê¨ämó¶")] private float probability;
 
+    bool _isFired = false;
+
     public enum AttackType
     {
         Projectile,
@@ -35,46 +37,43 @@ public class ProjectileShooter : MonoBehaviour
     private void Update()
     {
         _elapsedTime += Time.deltaTime;
-        switch (attackType)
+        if (Input.GetKeyDown(inputKey))
         {
-            case AttackType.Projectile:
-                {
-                    _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
-                    // ì¸óÕÇ™ì¸Ç¡ÇΩÇÁ
-                    if (Input.GetKeyDown(inputKey))
+            _isFired = true;
+
+            _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
+            GameObject proj;
+            Projectile projClass;
+            proj = GameObject.Instantiate(projectile);
+            projClass = proj.GetComponent<Projectile>();
+
+            switch (attackType)
+            {
+                case AttackType.Projectile:
+                    proj.transform.position = origin.position;
+                    projClass.GetSetInstantiator = gameObject.tag == "P1" ? Projectile.Instantiator.P1 : Projectile.Instantiator.P2;
+                    projClass.Direction = _direction;
+                    projClass.Speed = speedNormal;
+                    break;
+                case AttackType.Thunder:
+                    _direction = origin.up;
+                    Random.InitState((int)_elapsedTime);
+                    var rand = Random.Range(1, 11);
+                    proj.transform.position = origin.position;
+                    projClass.GetSetInstantiator = gameObject.tag == "P1" ? Projectile.Instantiator.P1 : Projectile.Instantiator.P2;
+                    projClass.Direction = _direction;
+                    if (rand < probability)
                     {
-                        var proj = GameObject.Instantiate(projectile);
-                        proj.transform.position = origin.position;
-                        var projClass = proj.GetComponent<Projectile>();
-                        projClass.Direction = _direction;
+
+                        projClass.Speed = speedThunder;
+                        Random.InitState((int)_elapsedTime);
+                    }
+                    else
+                    {
                         projClass.Speed = speedNormal;
                     }
                     break;
-                }
-            case AttackType.Thunder:
-                {
-                    _direction = origin.up;
-                    if (Input.GetKeyDown(inputKey))
-                    {
-                        Random.InitState((int)_elapsedTime);
-                        var rand = Random.Range(1, 11);
-                        var proj = GameObject.Instantiate(projectile);
-                        proj.transform.position = origin.position;
-                        var projClass = proj.GetComponent<Projectile>();
-                        projClass.Direction = _direction;
-                        if (rand < probability)
-                        {
-
-                            projClass.Speed = speedThunder;
-                            Random.InitState((int)_elapsedTime);
-                        }
-                        else
-                        {
-                            projClass.Speed = speedNormal;
-                        }
-                    }
-                    break;
-                }
+            }
         }
     }
 
