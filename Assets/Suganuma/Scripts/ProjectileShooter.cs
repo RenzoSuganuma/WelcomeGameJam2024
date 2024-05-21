@@ -7,12 +7,14 @@ using UnityEngine;
 /// </summary>
 public class ProjectileShooter : MonoBehaviour
 {
-    [SerializeField] private Transform origin;
-    [SerializeField] private float radius;
-    [SerializeField] private KeyCode inputKey;
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private AttackType attackType;
-    [SerializeField] private float speedNormal;
+    [SerializeField, Header("発射元のオブジェクト")] private Transform origin;
+    [SerializeField, Header("動径の半径")] private float radius;
+    [SerializeField, Header("入力キー")] private KeyCode inputKey;
+    [SerializeField, Header("発射物")] private GameObject projectile;
+    [SerializeField, Header("攻撃タイプ")] private AttackType attackType;
+    [SerializeField, Header("通常発射物の速度")] private float speedNormal;
+    [SerializeField, Header("即着発射物の速度")] private float speedThunder;
+    [SerializeField, Header("即着発射物の生成確率")] private float probability;
 
     public enum AttackType
     {
@@ -56,12 +58,21 @@ public class ProjectileShooter : MonoBehaviour
                     if (Input.GetKeyDown(inputKey))
                     {
                         Random.InitState((int)_elapsedTime);
-                        var rnd = Random.Range(1, 11);
+                        var rand = Random.Range(1, 11);
                         var proj = GameObject.Instantiate(projectile);
                         proj.transform.position = origin.position;
                         var projClass = proj.GetComponent<Projectile>();
                         projClass.Direction = _direction;
-                        //projClass.Speed = rnd < ;
+                        if (rand < probability)
+                        {
+
+                            projClass.Speed = speedThunder;
+                            Random.InitState((int)_elapsedTime);
+                        }
+                        else
+                        {
+                            projClass.Speed = speedNormal;
+                        }
                     }
                     break;
                 }
