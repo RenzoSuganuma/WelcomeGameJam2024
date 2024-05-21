@@ -16,14 +16,6 @@ public class HPHandler : MonoBehaviour, IDamage
         _healthPoint = _maxHealthPoint;
     }
 
-    private void Update()
-    {
-        if (_healthPoint < 1)
-        {
-            Debug.Log(gameObject.name + "Is Death");
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Projectile projectile))
