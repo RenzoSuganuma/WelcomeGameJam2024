@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class Projectile : MonoBehaviour
 {
-    [SerializeField, Header("”­Ë•¨ƒŒƒCƒ„[")] LayerMask layer;
-
     /// <summary>
     /// –Úw‚µ‚Ä‚¢‚é•ûŒü
     /// </summary>
