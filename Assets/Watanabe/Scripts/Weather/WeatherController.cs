@@ -10,6 +10,8 @@ public struct RainRange
     [SerializeField]
     private Transform _maxWidth;
 
+    public Transform Min { get => _minWidth; set => _minWidth = value; }
+    public Transform Max { get => _maxWidth; set => _maxWidth = value; }
     public readonly float MinWidth => _minWidth.position.x;
     public readonly float MaxWidth => _maxWidth.position.x;
     public readonly float Height => _minWidth.position.y;
@@ -41,12 +43,15 @@ public class WeatherController
 
     public WeatherType WeatherType { get => _weatherType; set => _weatherType = value; }
 
-    public void Initialize()
+    public void Initialize(Transform parent)
     {
         _rainTimer = 0f;
         _objectPool ??= new();
         _damageRainRandom ??= new();
         _spawnRangeRandom ??= new();
+
+        if (_rainRange.Min == null) { _rainRange.Min = parent.GetChild(0).transform; }
+        if (_rainRange.Max == null) { _rainRange.Max = parent.GetChild(1).transform; }
     }
 
     public void OnUpdate(float deltaTime)

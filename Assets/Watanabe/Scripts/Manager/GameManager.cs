@@ -77,11 +77,18 @@ public class GameManager : MonoBehaviour
     {
         Timer = _timeLimit;
         IsGameFinish = false;
-        _weatherController.Initialize();
+        _weatherController.Initialize(transform);
+
+        if (_player1 == null) { _player1 = GameObject.Find("Shooter_P1"); }
+        if (_player2 == null) { _player1 = GameObject.Find("Shooter_P2"); }
 
         _player1Health = _player1.GetComponent<HPHandler>();
         _player2Health = _player2.GetComponent<HPHandler>();
 
+        if (_uiController == null)
+        {
+            _uiController = GameObject.Find("InGameUI").GetComponent<SceneUIController>();
+        }
         _player1Health.UIController = _uiController;
         _player2Health.UIController = _uiController;
 
