@@ -81,12 +81,31 @@ public class Projectile : MonoBehaviour
             { GameObject.Destroy(this.gameObject); }
         }
 
+        // ÉvÉåÉCÉÑÅ[Ç…ìñÇΩÇ¡ÇΩéû
         if (!collision.gameObject.CompareTag(_instantiator.ToString()) && collision.TryGetComponent<HPHandler>(out var component))
         {
             var eff = GameObject.Instantiate(_hitEffect);
             eff.transform.position = transform.position;
+
             GameObject.Destroy(eff, 1);
             GameObject.Destroy(this.gameObject);
         }
+
+        SEType type = SEType.None;
+
+        if (collision.gameObject.CompareTag(Instantiator.P1.ToString()) 
+            && !collision.gameObject.CompareTag(_instantiator.ToString()))    // P1Ç∆ìñÇΩÇ¡ÇΩèÍçá
+        {
+            Debug.Log("p1 damaged");
+            type = SEType.P1Damaged;
+        }
+        else if (collision.gameObject.CompareTag(Instantiator.P2.ToString()) 
+            && !collision.gameObject.CompareTag(_instantiator.ToString()))    // P2Ç∆ìñÇΩÇ¡ÇΩèÍçá
+        {
+            Debug.Log("p2 damaged");
+            type = SEType.P2Damaged;
+        }
+
+        AudioManager.Instance.PlaySE(type);
     }
 }

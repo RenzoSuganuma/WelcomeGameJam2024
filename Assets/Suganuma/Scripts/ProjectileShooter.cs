@@ -39,12 +39,27 @@ public class ProjectileShooter : MonoBehaviour
         if (gameObject.CompareTag("P1"))
         { _origin.up = _direction; }
 
-        if (Input.GetKeyDown(_fireKey))
+        if (Input.GetKeyDown(_fireKey)) // î≠éÀÉLÅ[ì¸óÕéû
         {
             GameObject proj;
             Projectile projClass;
             proj = GameObject.Instantiate(_projectile);
             projClass = proj.GetComponent<Projectile>();
+
+            SEType type = SEType.None;
+
+            if (gameObject.CompareTag(Projectile.Instantiator.P1.ToString()))   // P1ÇæÇ¡ÇΩèÍçá
+            {
+                Debug.Log("p1 fired");
+                type = SEType.P1Attack;
+            }
+            else if (gameObject.CompareTag(Projectile.Instantiator.P2.ToString()))  // P2ÇæÇ¡ÇΩèÍçá
+            {
+                Debug.Log("p2 fired");
+                type = SEType.P2Attack;
+            }
+
+            AudioManager.Instance.PlaySE(type);
 
             switch (_attackType)
             {
