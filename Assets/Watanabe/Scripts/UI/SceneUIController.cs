@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SceneUIController : MonoBehaviour
@@ -19,12 +19,17 @@ public class TitleSceneUI : ISceneUI
 {
     [SerializeField]
     private Button _startButton = default;
+    [SerializeField]
+    private Image _rulePanel = default;
 
     public void Initialize()
     {
+        //Button.onClick.AddListener : ボタンを押したときに実行する関数を指定できる
         _startButton.onClick.AddListener(() => SceneLoader.FadeLoad(SceneName.InGame));
+        _rulePanel.gameObject.SetActive(false);
 
         AudioManager.Instance.PlayBGM(BGMType.Title);
+        Fade.Instance.StartFadeIn();
     }
 }
 
@@ -62,6 +67,14 @@ public class ResultSceneUI : ISceneUI
     {
         _returnTitleButton?.onClick.AddListener(() => SceneLoader.FadeLoad(SceneName.Title));
 
-        Debug.Log(GameManager.Instance.WinningType);
+        //switch : 単一条件の分岐処理に役立つ
+        var bgm = GameManager.Instance.WinningType switch
+        {
+            WinningType.P1Win => BGMType.P1Win,
+            WinningType.P2Win => BGMType.P2Win,
+            WinningType.Draw => BGMType.Draw,
+            _ => BGMType.Draw
+        };
+        AudioManager.Instance.PlayBGM(bgm);
     }
 }
