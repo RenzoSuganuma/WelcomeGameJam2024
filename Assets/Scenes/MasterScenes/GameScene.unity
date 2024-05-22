@@ -184,9 +184,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1477008318}
     - target: {fileID: 5192720655404097162, guid: cc5e7ab8cfc72c14a99d55d1cc438b08, type: 3}
+      propertyPath: _timeLimit
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192720655404097162, guid: cc5e7ab8cfc72c14a99d55d1cc438b08, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 404558014}
+    - target: {fileID: 5192720655404097162, guid: cc5e7ab8cfc72c14a99d55d1cc438b08, type: 3}
+      propertyPath: _heavyRainPhaseTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192720655404097162, guid: cc5e7ab8cfc72c14a99d55d1cc438b08, type: 3}
+      propertyPath: _weatherController._damageRainProbability
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -544,6 +556,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 932960570145322281, guid: 24ee8d6971d24304aab9ab8c53f6a0b6, type: 3}
+      propertyPath: _attackInterval
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6071096495857736245, guid: 24ee8d6971d24304aab9ab8c53f6a0b6, type: 3}
       propertyPath: speed
       value: 3
@@ -652,7 +668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 507807182545104581, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
       propertyPath: _speedNormal
-      value: 30
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 507807182545104581, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
+      propertyPath: _attackInterval
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1588559112110938272, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
       propertyPath: _healthSlider
@@ -712,7 +732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7645505018453283025, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
       propertyPath: speed
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7645505018453283025, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
       propertyPath: _leftBounds

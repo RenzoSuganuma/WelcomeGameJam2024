@@ -46,6 +46,7 @@ public class WeatherController
     public void Initialize(Transform parent)
     {
         _rainTimer = 0f;
+        _rainInterval = .2f;
         _objectPool = new();
         _damageRainRandom ??= new();
         _spawnRangeRandom ??= new();

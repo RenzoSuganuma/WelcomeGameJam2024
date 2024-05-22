@@ -16,6 +16,9 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField, Header("即着発射物の速度")] private float _speedThunder;
     [SerializeField, Header("即着発射物の生成確率")] private float _probability;
     [SerializeField, Header("左右に腕を振る速度")] private float _wipeSpeed;
+    [SerializeField, Header("攻撃インターバル"), Range(.1f, 3f)] private float _attackInterval;
+
+    private float _elapsedTimeAfterAttack = 0f;
 
     public enum AttackType
     {
@@ -23,7 +26,7 @@ public class ProjectileShooter : MonoBehaviour
         Thunder
     }
 
-    private float _elapsedTime = 0;
+    private float _elapsedGameTime = 0;
     private Vector3 _direction = Vector3.zero;
 
     private void Start()
@@ -31,17 +34,23 @@ public class ProjectileShooter : MonoBehaviour
         // 何も初期値が設定されていない時に特定の値で初期化
         if (_origin == null) _origin = transform;
         _radius = _radius < 1 ? 2 : _radius;
+
+        _elapsedTimeAfterAttack = _attackInterval;
     }
 
     private void Update()
     {
-        _elapsedTime += Time.deltaTime * _wipeSpeed;
-        _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
+        _elapsedGameTime += Time.deltaTime * _wipeSpeed;
+        _direction = FindDirection(Mathf.Sin(_elapsedGameTime) + 90f * Mathf.Deg2Rad);
         if (gameObject.CompareTag("P1"))
         { _origin.up = _direction; }
 
-        if (Input.GetKeyDown(_fireKey)) // 発射キー入力時
+        _elapsedTimeAfterAttack += Time.deltaTime;
+
+        if (Input.GetKeyDown(_fireKey) && _elapsedTimeAfterAttack > _attackInterval) // 発射キー入力時
         {
+            _elapsedTimeAfterAttack = 0f;
+
             GameObject proj;
             Projectile projClass;
             proj = GameObject.Instantiate(_projectile);
