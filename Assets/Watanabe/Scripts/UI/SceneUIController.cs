@@ -7,6 +7,8 @@ public class SceneUIController : MonoBehaviour
     [SerializeReference]
     private ISceneUI _sceneUI = default;
 
+    public ISceneUI SceneUI => _sceneUI;
+
     private void Start()
     {
         if (_sceneUI == null) { return; }
@@ -46,6 +48,7 @@ public class InGameUI : ISceneUI
     [SerializeField]
     private HPHandler _p2 = default;
 
+    public Text TimerText => _timerText;
     public Slider P1Slider => _p1Slider;
     public Slider P2Slider => _p2Slider;
 
