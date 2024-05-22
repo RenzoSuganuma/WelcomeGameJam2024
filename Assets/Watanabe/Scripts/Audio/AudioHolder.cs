@@ -44,7 +44,9 @@ public enum BGMType
     None,
     Title,
     InGame,
-    Result
+    P1Win,
+    P2Win,
+    Draw
 }
 
 public enum SEType
