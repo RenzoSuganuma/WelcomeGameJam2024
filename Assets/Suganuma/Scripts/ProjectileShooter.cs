@@ -50,12 +50,10 @@ public class ProjectileShooter : MonoBehaviour
 
             if (gameObject.CompareTag(Projectile.Instantiator.P1.ToString()))   // P1ÇæÇ¡ÇΩèÍçá
             {
-                Debug.Log("p1 fired");
                 type = SEType.P1Attack;
             }
             else if (gameObject.CompareTag(Projectile.Instantiator.P2.ToString()))  // P2ÇæÇ¡ÇΩèÍçá
             {
-                Debug.Log("p2 fired");
                 type = SEType.P2Attack;
             }
 

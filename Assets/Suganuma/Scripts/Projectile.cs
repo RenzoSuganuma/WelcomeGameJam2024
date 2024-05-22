@@ -96,13 +96,11 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag(Instantiator.P1.ToString()) 
             && !collision.gameObject.CompareTag(_instantiator.ToString()))    // P1Ç∆ìñÇΩÇ¡ÇΩèÍçá
         {
-            Debug.Log("p1 damaged");
             type = SEType.P1Damaged;
         }
         else if (collision.gameObject.CompareTag(Instantiator.P2.ToString()) 
             && !collision.gameObject.CompareTag(_instantiator.ToString()))    // P2Ç∆ìñÇΩÇ¡ÇΩèÍçá
         {
-            Debug.Log("p2 damaged");
             type = SEType.P2Damaged;
         }
 

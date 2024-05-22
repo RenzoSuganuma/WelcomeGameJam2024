@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// HPスライダーの位置を更新する機能を提供する
+/// </summary>
 public class HPSliderController
     : MonoBehaviour
 {
