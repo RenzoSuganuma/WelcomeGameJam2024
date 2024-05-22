@@ -280,18 +280,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 507807182545104581, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
-      propertyPath: _fireKey
-      value: 304
-      objectReference: {fileID: 0}
-    - target: {fileID: 656171484267963964, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 656171484267963964, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.64
-      objectReference: {fileID: 0}
     - target: {fileID: 1784595011914701542, guid: 524915cc72fa1b044a30584fa2943f5a, type: 3}
       propertyPath: m_Name
       value: Shooter_P1
