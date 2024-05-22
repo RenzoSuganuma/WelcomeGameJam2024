@@ -15,6 +15,7 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField, Header("通常発射物の速度")] private float _speedNormal;
     [SerializeField, Header("即着発射物の速度")] private float _speedThunder;
     [SerializeField, Header("即着発射物の生成確率")] private float _probability;
+    [SerializeField, Header("左右に腕を振る速度")] private float _wipeSpeed;
 
     public enum AttackType
     {
@@ -34,7 +35,7 @@ public class ProjectileShooter : MonoBehaviour
 
     private void Update()
     {
-        _elapsedTime += Time.deltaTime;
+        _elapsedTime += Time.deltaTime * _wipeSpeed;
         _direction = FindDirection(Mathf.Sin(_elapsedTime) + 90f * Mathf.Deg2Rad);
         if (gameObject.CompareTag("P1"))
         { _origin.up = _direction; }
@@ -71,7 +72,7 @@ public class ProjectileShooter : MonoBehaviour
                     break;
                 case AttackType.Thunder:
                     _direction = _origin.up;
-                    Random.InitState((int)_elapsedTime);
+                    Random.InitState(Random.Range(0,128));
                     var rand = Random.Range(1, 11);
                     proj.transform.position = _origin.position;
 

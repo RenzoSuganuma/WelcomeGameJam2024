@@ -858,7 +858,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: TITLE TITLE TITLE
+  m_Text: "\u6885\u96E8\u5BA3\u6226"
 --- !u!222 &1331442488
 CanvasRenderer:
   m_ObjectHideFlags: 0

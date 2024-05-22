@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class move : MonoBehaviour
 {
-    [SerializeField] float speed = 0.02f;//速度
-    [SerializeField] float Right = 5f;//右端
-    [SerializeField] float Left = -5f;//左端
+    [SerializeField] float speed = 1f;//速度
     [SerializeField] PlayerType player = PlayerType.P1;
     [SerializeField] Transform _rightBounds;
     [SerializeField] Transform _leftBounds;
@@ -43,7 +41,7 @@ public class move : MonoBehaviour
             if (Input.GetKey(KeyCode.RightArrow)) mov = 1f;
         }
 
-        mov *= speed;
+        mov *= (speed * Time.deltaTime);
         //var mov = Input.GetAxis("Horizontal") * speed;
 
         if (mov >= 0 && Pos.x <= _rightBounds.position.x)

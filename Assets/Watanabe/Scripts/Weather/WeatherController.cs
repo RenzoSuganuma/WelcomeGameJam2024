@@ -46,7 +46,7 @@ public class WeatherController
     public void Initialize(Transform parent)
     {
         _rainTimer = 0f;
-        _objectPool ??= new();
+        _objectPool = new();
         _damageRainRandom ??= new();
         _spawnRangeRandom ??= new();
 
@@ -63,6 +63,11 @@ public class WeatherController
             if (_weatherType == WeatherType.Rainy) { Rainy(); }
             else if (_weatherType == WeatherType.HeavyRain) { HeavyRain(); }
         }
+    }
+
+    public void OnDestroy()
+    {
+        _objectPool = null;
     }
 
     //豪雨

@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -981,7 +981,7 @@ MonoBehaviour:
         _backGroundImage: {fileID: 188356630}
         _p1Winning:
           <WinningMessage>k__BackingField: P1 Win!!!
-          <BackGround>k__BackingField: {fileID: 21300000, guid: 3df57685816896941836c01d6733312e, type: 3}
+          <BackGround>k__BackingField: {fileID: 21300000, guid: 7da0fbf02e345bc4aa2f929eaac1415f, type: 3}
         _p2Winning:
           <WinningMessage>k__BackingField: P2 Win!!!
           <BackGround>k__BackingField: {fileID: 21300000, guid: f1245668bdbe4824985d0372937b1915, type: 3}
