@@ -75,12 +75,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _timer = _timeLimit;
+        Timer = _timeLimit;
         IsGameFinish = false;
         _weatherController.Initialize();
 
         _player1Health = _player1.GetComponent<HPHandler>();
         _player2Health = _player2.GetComponent<HPHandler>();
+
+        _player1Health.UIController = _uiController;
+        _player2Health.UIController = _uiController;
 
         AudioManager.Instance.PlayBGM(BGMType.InGame);
     }
@@ -92,7 +95,7 @@ public class GameManager : MonoBehaviour
         var deltaTime = Time.deltaTime;
 
         _weatherController.OnUpdate(deltaTime);
-        _timer -= deltaTime;
+        Timer -= deltaTime;
         if (GameOverFlag())
         {
             Debug.Log("GameFinish");
