@@ -15,12 +15,15 @@ public class GameManager : MonoBehaviour
     private GameObject _player2 = default;
     [SerializeField]
     private WeatherController _weatherController = new();
+    [SerializeField]
+    private SceneUIController _uiController = default;
 
     private HPHandler _player1Health = default;
     private HPHandler _player2Health = default;
 
     private bool _isGameFinish = false;
 
+    /// <summary> ゲームの終了フラグ </summary>
     protected bool IsGameFinish
     {
         get => _isGameFinish;
@@ -38,6 +41,18 @@ public class GameManager : MonoBehaviour
 
                 SceneLoader.FadeLoad(SceneName.Result);
             }
+        }
+    }
+    protected float Timer
+    {
+        get => _timer;
+        private set
+        {
+            _timer = value;
+            if (_uiController == null) { return; }
+
+            var inGameUI = (InGameUI)_uiController.SceneUI;
+            inGameUI.TimerText.text = $"Timer\n{value.ToString("F1")}";
         }
     }
 
