@@ -71,6 +71,13 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         _rb2d.velocity = _direction.normalized * _speed;
+
+        if (_instantiator.ToString() == Instantiator.P1.ToString())
+        {
+            var rot = this.gameObject.transform.rotation;
+            rot.z += Quaternion.EulerRotation(0, 0, Time.deltaTime * 4).z;
+            this.gameObject.transform.rotation = rot;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -93,12 +100,12 @@ public class Projectile : MonoBehaviour
 
         SEType type = SEType.None;
 
-        if (collision.gameObject.CompareTag(Instantiator.P1.ToString()) 
+        if (collision.gameObject.CompareTag(Instantiator.P1.ToString())
             && !collision.gameObject.CompareTag(_instantiator.ToString()))    // P1Ç∆ìñÇΩÇ¡ÇΩèÍçá
         {
             type = SEType.P1Damaged;
         }
-        else if (collision.gameObject.CompareTag(Instantiator.P2.ToString()) 
+        else if (collision.gameObject.CompareTag(Instantiator.P2.ToString())
             && !collision.gameObject.CompareTag(_instantiator.ToString()))    // P2Ç∆ìñÇΩÇ¡ÇΩèÍçá
         {
             type = SEType.P2Damaged;

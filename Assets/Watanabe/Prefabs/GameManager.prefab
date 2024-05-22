@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da564fa3c8e0444c864bfad404812f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeLimit: 1
+  _timeLimit: 2
   _heavyRainPhaseTime: 0
   _timer: 0
   _player1: {fileID: 0}

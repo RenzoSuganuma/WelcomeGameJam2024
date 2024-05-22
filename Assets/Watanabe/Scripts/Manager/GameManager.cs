@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -69,25 +70,39 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += SceneManager_sceneLoaded; ;
         }
         else { Destroy(gameObject); }
     }
 
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (arg0.name == "GameScene")
+        {
+            InitializeGame();
+        }
+    }
+
     private void Start()
+    {
+        //InitializeGame();
+    }
+
+    private void InitializeGame()
     {
         Timer = _timeLimit;
         IsGameFinish = false;
         _weatherController.Initialize(transform);
 
         if (_player1 == null) { _player1 = GameObject.Find("Shooter_P1"); }
-        if (_player2 == null) { _player1 = GameObject.Find("Shooter_P2"); }
+        if (_player2 == null) { _player2 = GameObject.Find("Shooter_P2"); }
 
         _player1Health = _player1.GetComponent<HPHandler>();
         _player2Health = _player2.GetComponent<HPHandler>();
 
         if (_uiController == null)
         {
-            _uiController = GameObject.Find("InGameUI").GetComponent<SceneUIController>();
+            _uiController = GameObject.FindAnyObjectByType<SceneUIController>();
         }
         _player1Health.UIController = _uiController;
         _player2Health.UIController = _uiController;
@@ -112,6 +127,11 @@ public class GameManager : MonoBehaviour
         {
             _weatherController.WeatherType = WeatherType.HeavyRain;
         }
+    }
+
+    private void OnDestroy()
+    {
+        _weatherController?.OnDestroy();
     }
 
     /// <summary> ゲーム終了判定 </summary>
