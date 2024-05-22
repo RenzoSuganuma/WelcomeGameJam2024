@@ -54,8 +54,11 @@ public class InGameUI : ISceneUI
 
     public void Initialize()
     {
-        _p1Slider.maxValue = _p1.CurrentHealth;
-        _p2Slider.maxValue = _p2.CurrentHealth;
+        _p1Slider.maxValue = _p1.MaxHealth;
+        _p1Slider.value = _p1.MaxHealth;
+
+        _p2Slider.maxValue = _p2.MaxHealth;
+        _p2Slider.value = _p2.MaxHealth;
 
         AudioManager.Instance.PlayBGM(BGMType.InGame);
     }

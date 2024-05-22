@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85614cd7eb3d7d048b660effcdea26a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _origin: {fileID: 656171484267963964}
+  _origin: {fileID: 0}
   _radius: 2
   _fireKey: 304
   _projectile: {fileID: 5165814252910396123, guid: 29564cfbbaea67a4fbc7ed5c5c1cfffd, type: 3}
@@ -74,6 +74,8 @@ MonoBehaviour:
   Right: 5
   Left: -5
   player: 0
+  _rightBounds: {fileID: 0}
+  _leftBounds: {fileID: 0}
 --- !u!114 &1588559112110938272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealthPoint: 10
   _healthPoint: 0
+  _healthSlider: {fileID: 0}
 --- !u!61 &7563172023866641306
 BoxCollider2D:
   m_ObjectHideFlags: 0
