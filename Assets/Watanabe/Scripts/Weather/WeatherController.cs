@@ -12,9 +12,11 @@ public struct RainRange
 
     public readonly float MinWidth => _minWidth.position.x;
     public readonly float MaxWidth => _maxWidth.position.x;
+    public readonly float Height => _minWidth.position.y;
 }
 
-public class WeatherController : MonoBehaviour
+[Serializable]
+public class WeatherController
 {
     [SerializeField]
     private WeatherType _weatherType = WeatherType.Rainy;
@@ -39,7 +41,7 @@ public class WeatherController : MonoBehaviour
 
     public WeatherType WeatherType { get => _weatherType; set => _weatherType = value; }
 
-    private void Start()
+    public void Initialize()
     {
         _rainTimer = 0f;
         _objectPool ??= new();
@@ -47,9 +49,9 @@ public class WeatherController : MonoBehaviour
         _spawnRangeRandom ??= new();
     }
 
-    private void Update()
+    public void OnUpdate(float deltaTime)
     {
-        _rainTimer += Time.deltaTime;
+        _rainTimer += deltaTime;
         if (_rainTimer >= _rainInterval)
         {
             _rainTimer = 0f;
@@ -87,7 +89,7 @@ public class WeatherController : MonoBehaviour
         var spawnedRain = _objectPool.SpawnObject(rain);
         //生成位置の調整
         var spawnHol = _spawnRangeRandom.Next((int)_rainRange.MinWidth, (int)_rainRange.MaxWidth);
-        spawnedRain.transform.position = new Vector2(spawnHol, transform.position.y);
+        spawnedRain.transform.position = new Vector2(spawnHol, _rainRange.Height);
 
         if (spawnedRain.TryGetComponent(out Raindrop raindrop)) { raindrop.Initialize(_objectPool); }
     }

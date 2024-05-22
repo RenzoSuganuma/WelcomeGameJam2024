@@ -14,39 +14,71 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _player2 = default;
     [SerializeField]
-    private WeatherController _weatherController = default;
+    private WeatherController _weatherController = new();
 
     private HPHandler _player1Health = default;
     private HPHandler _player2Health = default;
 
     private bool _isGameFinish = false;
 
+    protected bool IsGameFinish
+    {
+        get => _isGameFinish;
+        private set
+        {
+            _isGameFinish = value;
+            if (value)
+            {
+                var p1HP = _player1Health.CurrentHealth;
+                var p2HP = _player2Health.CurrentHealth;
+
+                if (p1HP == p2HP) { WinningType = WinningType.Draw; }
+                else if (p1HP > p2HP) { WinningType = WinningType.P1Win; }
+                else { WinningType = WinningType.P2Win; }
+
+                SceneLoader.FadeLoad(SceneName.Result);
+            }
+        }
+    }
+
+    public WinningType WinningType { get; private set; }
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance == null) { Instance = this; }
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else { Destroy(gameObject); }
     }
 
     private void Start()
     {
         _timer = _timeLimit;
-        _isGameFinish = false;
+        IsGameFinish = false;
+        _weatherController.Initialize();
 
         _player1Health = _player1.GetComponent<HPHandler>();
         _player2Health = _player2.GetComponent<HPHandler>();
+
+        AudioManager.Instance.PlayBGM(BGMType.InGame);
     }
 
     private void Update()
     {
-        if (_isGameFinish) { return; }
+        if (IsGameFinish) { return; }
 
-        _timer -= Time.deltaTime;
+        var deltaTime = Time.deltaTime;
+
+        _weatherController.OnUpdate(deltaTime);
+        _timer -= deltaTime;
         if (GameOverFlag())
         {
             Debug.Log("GameFinish");
-            _isGameFinish = true;
-            SceneLoader.FadeLoad(SceneName.Result);
+            IsGameFinish = true;
         }
         else if (_timer <= _heavyRainPhaseTime && _weatherController.WeatherType == WeatherType.Rainy)
         {
@@ -57,5 +89,13 @@ public class GameManager : MonoBehaviour
     /// <summary> ゲーム終了判定 </summary>
     /// <returns> ゲーム終了条件を満たしたらtrue </returns>
     private bool GameOverFlag()
-        => _timer >= _timeLimit || _player1Health.CurrentHealth <= 0 || _player2Health.CurrentHealth <= 0;
+        => _timer <= 0f || _player1Health.CurrentHealth <= 0 || _player2Health.CurrentHealth <= 0;
+}
+
+public enum WinningType
+{
+    None,
+    P1Win,
+    P2Win,
+    Draw
 }

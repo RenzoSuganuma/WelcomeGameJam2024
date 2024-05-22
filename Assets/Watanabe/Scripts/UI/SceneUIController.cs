@@ -23,6 +23,8 @@ public class TitleSceneUI : ISceneUI
     public void Initialize()
     {
         _startButton.onClick.AddListener(() => SceneLoader.FadeLoad(SceneName.InGame));
+
+        AudioManager.Instance.PlayBGM(BGMType.Title);
     }
 }
 
@@ -46,6 +48,8 @@ public class InGameUI : ISceneUI
     {
         _p1Slider.maxValue = _p1.CurrentHealth;
         _p2Slider.maxValue = _p2.CurrentHealth;
+
+        AudioManager.Instance.PlayBGM(BGMType.InGame);
     }
 }
 
@@ -56,6 +60,8 @@ public class ResultSceneUI : ISceneUI
 
     public void Initialize()
     {
-        _returnTitleButton.onClick.AddListener(() => SceneLoader.FadeLoad(SceneName.Title));
+        _returnTitleButton?.onClick.AddListener(() => SceneLoader.FadeLoad(SceneName.Title));
+
+        Debug.Log(GameManager.Instance.WinningType);
     }
 }
