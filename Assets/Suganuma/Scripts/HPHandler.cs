@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// プレイヤのHPの保持をするクラス
@@ -9,6 +10,7 @@ public class HPHandler : MonoBehaviour, IDamage
     [SerializeField, Header("現在の体力")] private float _healthPoint;
 
     public float CurrentHealth => _healthPoint;
+    public float MaxHealth => _maxHealthPoint;
 
 
     private void Start()
